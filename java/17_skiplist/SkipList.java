@@ -77,10 +77,13 @@ public class SkipList {
         }
       }
     }
-
-    while (levelCount>1&&head.forwards[levelCount]==null){
+/*
+*作者原始为levelCount>1&&head.forwards[levelCount]==null，现改为levelCount-1
+*/
+    while (levelCount>1&&head.forwards[levelCount-1]==null){
       levelCount--;
     }
+
 
   }
 
@@ -105,6 +108,20 @@ public class SkipList {
       p = p.forwards[0];
     }
     System.out.println();
+  }
+  
+  //将索引也打印出来，便于分析
+   public void  prettyPrint(){
+    for (int i = levelCount ; i >= 0; i--) {
+      Node p = head.forwards[i];
+      System.out.print("level:" + i);
+      while (p != null) {
+        System.out.print("\t" + p);
+        p = p.forwards[i];
+      }
+      System.out.println();
+    }
+
   }
 
   public class Node {
